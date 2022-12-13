@@ -7,7 +7,7 @@ import java.awt.font.*;
 import java.nio.file.*;
 import java.net.*;
 
-public class micropro extends JFrame{
+public class temp_mic extends JFrame{
     JPanel login,register,home,terms,privacypolicy,transferp,purchasep,sellp,histp,chngpasp,chkamtp;
     JLabel signinlbl,frgtpaswd,reghere,termsl,privacyl,termshead,privacyhead,prsnldetails,name,transfer,purchase,sell,hist,amt,chngpas,logout;
     JTextField usernamel,fname,lname,bday,mobno,adharno,email,verotp;
@@ -16,7 +16,7 @@ public class micropro extends JFrame{
     JTextArea termsarea,policyarea;
     JScrollPane termspane,policypane;
 
-    micropro()throws Exception{
+    temp_mic()throws Exception{
         login=new JPanel(){
             public void paintComponent(Graphics g){
                 try{
@@ -100,21 +100,13 @@ public class micropro extends JFrame{
         login.add(loginb);
         loginb.addMouseListener(new MouseAdapter(){
             public void mousePressed(MouseEvent e){
-                try {
-                        URL url = new URL("https://www.google.com");
-                        URLConnection connection = url.openConnection();
-                        connection.connect();
-                        setTitle("SKY CRYPTO - DASHBORD");
-                        login.setVisible(false);
-                        register.setVisible(false);
-                        home.setVisible(true);                
-                        terms.setVisible(false);
-                        privacypolicy.setVisible(false);
-                            //ANIKET'S CODE HERE..
-                }
-                catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null,"Internet Not Connected");
-                }
+                setTitle("SKY CRYPTO - DASHBORD");
+                login.setVisible(false);
+                register.setVisible(false);
+                home.setVisible(true);
+                
+                terms.setVisible(false);
+                privacypolicy.setVisible(false);
             }
 
             public void mouseEntered(MouseEvent e){
@@ -479,21 +471,13 @@ public class micropro extends JFrame{
                     if(!verotp.isEnabled())
                         verotp.setEnabled(true);
                     else{
-                        try {
-                                URL url = new URL("https://www.google.com");
-                                URLConnection connection = url.openConnection();
-                                connection.connect();
-                                setTitle("SKY CRYPTO - LOGIN");
-                                login.setVisible(true);
-                                register.setVisible(false);
-                                home.setVisible(false);                
-                                terms.setVisible(false);
-                                privacypolicy.setVisible(false);
-                                    //ANIKET'S CODE HERE..
-                        }
-                        catch (Exception ex) {
-                            JOptionPane.showMessageDialog(null,"Internet Not Connected");
-                        }
+                        setTitle("SKY CRYPTO - LOGIN");
+                        login.setVisible(true);
+                        register.setVisible(false);
+                        home.setVisible(false);
+                        
+                        terms.setVisible(false);
+                        privacypolicy.setVisible(false);
                     }
                 }
             }
@@ -1619,6 +1603,6 @@ public class micropro extends JFrame{
     }
 
     public static void main(String args[])throws Exception{
-        micropro ob=new micropro();
+        temp_mic ob=new temp_mic();
     }
 }
