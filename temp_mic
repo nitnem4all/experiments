@@ -1,0 +1,1624 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.*;
+import java.util.*;
+import java.awt.font.*;
+import java.nio.file.*;
+import java.net.*;
+
+public class micropro extends JFrame{
+    JPanel login,register,home,terms,privacypolicy,transferp,purchasep,sellp,histp,chngpasp,chkamtp;
+    JLabel signinlbl,frgtpaswd,reghere,termsl,privacyl,termshead,privacyhead,prsnldetails,name,transfer,purchase,sell,hist,amt,chngpas,logout;
+    JTextField usernamel,fname,lname,bday,mobno,adharno,email,verotp;
+    JPasswordField passwordl,paswd,cnfrmpaswd;
+    JButton loginb,registerb;
+    JTextArea termsarea,policyarea;
+    JScrollPane termspane,policypane;
+
+    micropro()throws Exception{
+        login=new JPanel(){
+            public void paintComponent(Graphics g){
+                try{
+                 g.drawImage(new ImageIcon("back.jpeg").getImage(),0,0,null);
+                 g.setColor(Color.white);
+                 g.fillRoundRect(100,70,770,460,30,30); 
+                 g.setColor(new Color(38,167,222));
+                 g.fillRoundRect(100,70,330,460,30,30); 
+                 g.fillRect(400,70,30,460); 
+                 g.fillRoundRect(445,305,305,40,16,16); 
+                 g.setColor(Color.black);
+                 g.drawRoundRect(445,198,305,38,10,10);
+                 g.drawRoundRect(445,248,305,38,10,10);
+                 g.drawImage(new ImageIcon("logo.jpg").getImage(),105,75,null);
+                 g.drawImage(new ImageIcon("label.png").getImage(),450,80,null);
+                }
+                catch(Exception e){}
+            }
+        };
+        login.setBounds(0,0,1000,650);
+        login.setVisible(true);
+        login.setLayout(null);
+        add(login);
+
+        signinlbl=new JLabel("Sign into your account :");
+        usernamel=new JTextField("Username");
+        passwordl=new JPasswordField("Password");
+        loginb=new JButton("LOGIN");
+        frgtpaswd=new JLabel("Forgot Password ?");
+        reghere=new JLabel("Don't have account ? Register here..");
+        termsl=new JLabel("Terms of use");
+        privacyl=new JLabel("Privacy Policy");
+
+        signinlbl.setBounds(450,110,550,100);
+        signinlbl.setFont(new Font("courier",Font.BOLD,20));
+        login.add(signinlbl);
+
+        usernamel.setBounds(450,199,280,36);
+        usernamel.setForeground(Color.gray);
+        usernamel.setBorder(BorderFactory.createEmptyBorder());
+        login.add(usernamel);
+        usernamel.addFocusListener(new FocusAdapter(){
+            public void focusGained(FocusEvent e){
+                if(usernamel.getText().equals("Username"))
+                    usernamel.setText("");
+            }
+            public void focusLost(FocusEvent e){
+                if(usernamel.getText().equals(""))
+                    usernamel.setText("Username");
+            }
+        });
+
+        passwordl.setBounds(450,249,280,36);
+        passwordl.setForeground(Color.gray);
+        passwordl.setBorder(BorderFactory.createEmptyBorder());
+        passwordl.setEchoChar((char) 0);
+        login.add(passwordl);
+        passwordl.addFocusListener(new FocusAdapter(){
+            public void focusGained(FocusEvent e){
+                if(passwordl.getText().equals("Password")){
+                    passwordl.setText("");
+                    passwordl.setEchoChar('*');
+                }
+            }
+            public void focusLost(FocusEvent e){
+                if(passwordl.getText().equals("")){
+                    passwordl.setText("Password");
+                    passwordl.setEchoChar((char) 0);
+                }
+            }
+        });
+
+        loginb.setBounds(455,310,700,100);
+        loginb.setSize(290,30);
+        loginb.setFocusPainted(false);
+        loginb.setForeground(Color.white);
+        UIManager.put( "Button.select",new Color(211,71,157));
+        loginb.setBackground(new Color(38,167,222));
+        loginb.setBorder(BorderFactory.createEmptyBorder());
+        loginb.setFont(new Font("Segoe UI Black",Font.BOLD,20));
+        login.add(loginb);
+        loginb.addMouseListener(new MouseAdapter(){
+            public void mousePressed(MouseEvent e){
+                try {
+                        URL url = new URL("https://www.google.com");
+                        URLConnection connection = url.openConnection();
+                        connection.connect();
+                        setTitle("SKY CRYPTO - DASHBORD");
+                        login.setVisible(false);
+                        register.setVisible(false);
+                        home.setVisible(true);                
+                        terms.setVisible(false);
+                        privacypolicy.setVisible(false);
+                            //ANIKET'S CODE HERE..
+                }
+                catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null,"Internet Not Connected");
+                }
+            }
+
+            public void mouseEntered(MouseEvent e){
+                if(login.isVisible()){
+                    Graphics g=login.getGraphics();
+                    g.setColor(new Color(211,71,157));
+                    g.fillRoundRect(445,305,305,40,16,16);
+                    loginb.setBackground(new Color(211,71,157));
+                }
+            }
+
+            public void mouseExited(MouseEvent e){
+                if(login.isVisible()){
+                    Graphics g=login.getGraphics();
+                    g.setColor(new Color(38,167,222));
+                    g.fillRoundRect(445,305,305,40,16,16);
+                    loginb.setBackground(new Color(38,167,222));
+                }
+            }
+        });
+
+        frgtpaswd.setBounds(450,340,500,100);
+        frgtpaswd.setFont(new Font("courier",Font.BOLD,16));
+        frgtpaswd.setForeground(Color.gray);
+        login.add(frgtpaswd);
+        login.addMouseListener(new MouseAdapter(){
+            public void mousePressed(MouseEvent e){
+                if(e.getX()>445 && e.getX()<615       &&       e.getY()>380 && e.getY()<405){
+                    setTitle("SKY CRYPTO - LOGIN");
+                    login.setVisible(true);
+                    register.setVisible(false);
+                    home.setVisible(false);                    
+                    terms.setVisible(false);
+                    privacypolicy.setVisible(false);
+                    JOptionPane.showMessageDialog(null,"A TEMPORARY PASSWORD HAS BEEN SENT TO YOUR MOBILE NUMBER \n YOU CAN USE THAT AS YOUR LOGIN CREDENTIALS \n LATER ON CHANGE THAT IN YOUR PROFILE SETTINGS..");
+                }
+                else if(e.getX()>445 && e.getX()<790       &&       e.getY()>410 && e.getY()<440){
+                    setTitle("SKY CRYPTO - REGISTER");
+                    login.setVisible(false);
+                    register.setVisible(true);
+                    registerb.setBackground(new Color(113,50,165));
+                    home.setVisible(false);                    
+                    terms.setVisible(false);
+                    privacypolicy.setVisible(false);
+                }
+                else if(e.getX()>445 && e.getX()<565       &&       e.getY()>480 && e.getY()<500){
+                    setTitle("SKY CRYPTO - TERMS & CONDITIONS");
+                    login.setVisible(false);
+                    register.setVisible(false);
+                    home.setVisible(false);                    
+                    terms.setVisible(true);
+                    privacypolicy.setVisible(false);
+                }
+                else if(e.getX()>695 && e.getX()<835      &&       e.getY()>480 && e.getY()<500){
+                    setTitle("SKY CRYPTO - PRIVACY POLICY");
+                    login.setVisible(false);
+                    register.setVisible(false);
+                    home.setVisible(false);                    
+                    terms.setVisible(false);
+                    privacypolicy.setVisible(true);
+                }
+            }
+        });
+        login.addMouseMotionListener(new MouseMotionAdapter(){
+            public void mouseMoved(MouseEvent e){
+                if(e.getX()>445 && e.getX()<615       &&       e.getY()>380 && e.getY()<405){
+                    Font font = frgtpaswd.getFont();
+                    Map attributes = font.getAttributes();
+                    attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+                    frgtpaswd.setFont(font.deriveFont(attributes));
+                    frgtpaswd.setForeground(Color.black);
+                }
+                else if(e.getX()>445 && e.getX()<790       &&       e.getY()>410 && e.getY()<440){
+                    Font font = reghere.getFont();
+                    Map attributes = font.getAttributes();
+                    attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+                    reghere.setFont(font.deriveFont(attributes));
+                    reghere.setForeground(Color.black);
+                }
+                else if(e.getX()>445 && e.getX()<565       &&       e.getY()>480 && e.getY()<500){
+                    Font font = termsl.getFont();
+                    Map attributes = font.getAttributes();
+                    attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+                    termsl.setFont(font.deriveFont(attributes));
+                    termsl.setForeground(Color.black);
+                }
+                else if(e.getX()>695 && e.getX()<835      &&       e.getY()>480 && e.getY()<500){
+                    Font font = privacyl.getFont();
+                    Map attributes = font.getAttributes();
+                    attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+                    privacyl.setFont(font.deriveFont(attributes));
+                    privacyl.setForeground(Color.black);
+                }
+                else{
+                    Font font = frgtpaswd.getFont();
+                    Map attributes = font.getAttributes();
+                    attributes.put(TextAttribute.UNDERLINE,-1);
+                    frgtpaswd.setFont(font.deriveFont(attributes));
+                    frgtpaswd.setForeground(Color.gray);
+
+                    Font font1 = reghere.getFont();
+                    Map attributes1 = font1.getAttributes();
+                    attributes1.put(TextAttribute.UNDERLINE,-1);
+                    reghere.setFont(font1.deriveFont(attributes1));
+                    reghere.setForeground(Color.gray);
+
+                    Font font2 = termsl.getFont();
+                    Map attributes2 = font2.getAttributes();
+                    attributes2.put(TextAttribute.UNDERLINE,-1);
+                    termsl.setFont(font2.deriveFont(attributes2));
+                    termsl.setForeground(Color.gray);
+                
+                    Font font3 = privacyl.getFont();
+                    Map attributes3 = font3.getAttributes();
+                    attributes3.put(TextAttribute.UNDERLINE,-1);
+                    privacyl.setFont(font3.deriveFont(attributes1));
+                    privacyl.setForeground(Color.gray);
+                }
+            }
+        });
+
+        reghere.setBounds(450,375,500,100);
+        reghere.setFont(new Font("courier",Font.BOLD,16));
+        reghere.setForeground(Color.gray);
+        login.add(reghere);
+
+        termsl.setBounds(450,440,500,100);
+        termsl.setFont(new Font("courier",Font.BOLD,16));
+        termsl.setForeground(Color.gray);
+        login.add(termsl);
+        
+        privacyl.setBounds(700,440,500,100);
+        privacyl.setFont(new Font("courier",Font.BOLD,16));
+        privacyl.setForeground(Color.gray);
+        login.add(privacyl);
+
+
+
+
+
+
+        register=new JPanel(){
+            public void paintComponent(Graphics g){
+                try{
+                 g.drawImage(new ImageIcon("back.jpeg").getImage(),0,0,null);
+                 g.setColor(Color.white);
+                 g.fillRoundRect(100,70,770,460,30,30); 
+                 g.setColor(Color.black);
+                 g.fillRoundRect(100,70,770,20,30,30);
+                 g.drawImage(new ImageIcon("logo.png").getImage(),100,78,null);
+                 g.setColor(new Color(46,33,172));
+                 g.drawRoundRect(120,225,280,38,40,40); 
+                 g.setColor(new Color(132,54,164));                
+                 g.drawRoundRect(560,225,280,38,40,40);
+                 g.setColor(new Color(87,44,169));
+                 g.drawRoundRect(120,280,280,38,40,40); 
+                 g.setColor(new Color(186,65,158));                
+                 g.drawRoundRect(560,280,280,38,40,40);
+                 g.setColor(new Color(89,43,168));
+                 g.drawRoundRect(120,335,280,38,40,40); 
+                 g.setColor(new Color(175,64,159));                
+                 g.drawRoundRect(560,335,280,38,40,40);
+                 g.setColor(new Color(102,47,165));
+                 g.drawRoundRect(120,390,280,38,40,40); 
+                 g.setColor(new Color(214,72,158));                
+                 g.drawRoundRect(560,390,280,38,40,40);
+                 g.setColor(new Color(113,50,165));
+                 g.fillRoundRect(120,450,280,60,40,40);  
+                 g.setColor(new Color(222,75,156));               
+                 g.drawRoundRect(560,450,280,60,40,40);
+                }
+                catch(Exception e){}
+            }
+        };
+        register.setBounds(0,0,1000,650);
+        register.setLayout(null);
+        register.setVisible(false);
+        add(register);
+        
+        prsnldetails=new JLabel("Personal Details :");
+        fname=new JTextField("First Name");
+        lname=new JTextField("Last Name");
+        bday=new JTextField("Birth Date(DD-MM-YYYY)");
+        mobno=new JTextField("Mobile Number");
+        adharno=new JTextField("Aadhar Number");
+        email=new JTextField("Email ID");
+        paswd=new JPasswordField("Password");
+        cnfrmpaswd=new JPasswordField("Confirm Password");
+        registerb=new JButton("SEND OTP");
+        verotp=new JTextField("ENTER YOUR OTP HERE");
+
+        prsnldetails.setBounds(110,180,300,30);
+        prsnldetails.setFont(new Font("courier",Font.BOLD,20));
+        register.add(prsnldetails);
+
+        fname.setBounds(130,230,260,30);
+        fname.setForeground(new Color(46,33,172));
+        fname.setFont(new Font("consolas",Font.BOLD,16));
+        fname.setBorder(BorderFactory.createEmptyBorder());
+        register.add(fname);
+        fname.addFocusListener(new FocusAdapter(){
+            public void focusGained(FocusEvent e){
+                if(fname.getText().equals("First Name"))
+                    fname.setText("");
+            }
+            public void focusLost(FocusEvent e){
+                if(fname.getText().equals(""))
+                    fname.setText("First Name");
+            }
+        });
+
+        lname.setBounds(570,230,260,30);
+        lname.setForeground(new Color(132,54,164));
+        lname.setFont(new Font("consolas",Font.BOLD,16));
+        lname.setBorder(BorderFactory.createEmptyBorder());
+        register.add(lname);
+        lname.addFocusListener(new FocusAdapter(){
+            public void focusGained(FocusEvent e){
+                if(lname.getText().equals("Last Name"))
+                    lname.setText("");
+            }
+            public void focusLost(FocusEvent e){
+                if(lname.getText().equals(""))
+                    lname.setText("Last Name");
+            }
+        });
+
+        bday.setBounds(130,285,260,30);
+        bday.setForeground(new Color(87,44,169));
+        bday.setFont(new Font("consolas",Font.BOLD,16));
+        bday.setBorder(BorderFactory.createEmptyBorder());
+        register.add(bday);
+        bday.addFocusListener(new FocusAdapter(){
+            public void focusGained(FocusEvent e){
+                if(bday.getText().equals("Birth Date(DD-MM-YYYY)"))
+                    bday.setText("");
+            }
+            public void focusLost(FocusEvent e){
+                if(bday.getText().equals(""))
+                    bday.setText("Birth Date(DD-MM-YYYY)");
+            }
+        });
+
+        mobno.setBounds(570,285,260,30);
+        mobno.setForeground(new Color(186,65,158));
+        mobno.setFont(new Font("consolas",Font.BOLD,16));
+        mobno.setBorder(BorderFactory.createEmptyBorder());
+        register.add(mobno);
+        mobno.addFocusListener(new FocusAdapter(){
+            public void focusGained(FocusEvent e){
+                if(mobno.getText().equals("Mobile Number"))
+                    mobno.setText("");         
+            }
+            public void focusLost(FocusEvent e){
+                if(mobno.getText().equals(""))
+                    mobno.setText("Mobile Number");
+            }
+        });
+
+        adharno.setBounds(130,340,260,30);
+        adharno.setForeground(new Color(89,43,168));
+        adharno.setFont(new Font("consolas",Font.BOLD,16));
+        adharno.setBorder(BorderFactory.createEmptyBorder());
+        register.add(adharno);
+        adharno.addFocusListener(new FocusAdapter(){
+            public void focusGained(FocusEvent e){
+                if(adharno.getText().equals("Aadhar Number"))
+                    adharno.setText("");
+            }
+            public void focusLost(FocusEvent e){
+                if(adharno.getText().equals(""))
+                    adharno.setText("Aadhar Number");
+            }
+        });
+
+        email.setBounds(570,340,260,30);
+        email.setForeground(new Color(175,64,159));
+        email.setFont(new Font("consolas",Font.BOLD,16));
+        email.setBorder(BorderFactory.createEmptyBorder());
+        register.add(email);
+        email.addFocusListener(new FocusAdapter(){
+            public void focusGained(FocusEvent e){
+                if(email.getText().equals("Email ID"))
+                    email.setText("");
+            }
+            public void focusLost(FocusEvent e){
+                if(email.getText().equals(""))
+                    email.setText("Email ID");
+            }
+        });
+
+        paswd.setBounds(130,395,260,30);
+        paswd.setForeground(new Color(102,47,165));
+        paswd.setFont(new Font("consolas",Font.BOLD,16));
+        paswd.setEchoChar((char) 0);
+        paswd.setBorder(BorderFactory.createEmptyBorder());
+        register.add(paswd);
+        paswd.addFocusListener(new FocusAdapter(){
+            public void focusGained(FocusEvent e){
+                if(paswd.getText().equals("Password")){
+                    paswd.setText("");
+                    paswd.setEchoChar('*');
+                }
+            }
+            public void focusLost(FocusEvent e){
+                if(paswd.getText().equals("")){
+                    paswd.setText("Password");
+                    paswd.setEchoChar((char) 0);
+                }
+            }
+        });
+
+        cnfrmpaswd.setBounds(570,395,260,30);
+        cnfrmpaswd.setForeground(new Color(214,72,158));
+        cnfrmpaswd.setFont(new Font("consolas",Font.BOLD,16));
+        cnfrmpaswd.setEchoChar((char) 0);
+        cnfrmpaswd.setBorder(BorderFactory.createEmptyBorder());
+        register.add(cnfrmpaswd);
+        cnfrmpaswd.addFocusListener(new FocusAdapter(){
+            public void focusGained(FocusEvent e){
+                if(cnfrmpaswd.getText().equals("Confirm Password")){
+                    cnfrmpaswd.setText("");
+                    cnfrmpaswd.setEchoChar('*');           
+                    registerb.setEnabled(true);
+                }
+            }
+            public void focusLost(FocusEvent e){
+                if(cnfrmpaswd.getText().equals("")){
+                    cnfrmpaswd.setText("Confirm Password");
+                    cnfrmpaswd.setEchoChar((char) 0);
+                }
+            }
+        });
+
+        registerb.setBounds(130,453,260,50);
+        registerb.setForeground(Color.white);
+        registerb.setBackground(new Color(113,50,165));
+        registerb.setFont(new Font("courier",Font.BOLD,25));
+        registerb.setFocusPainted(false);
+        registerb.setEnabled(false);
+        registerb.setBorder(BorderFactory.createEmptyBorder());
+        register.add(registerb);
+        registerb.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                if(fname.getText().equals("First Name") || lname.getText().equals("Last Name") || bday.getText().equals("Birth Date(DD-MM-YYYY)") || mobno.getText().equals("Mobile Number") || adharno.getText().equals("Aadhar Number") || email.getText().equals("Email ID") || paswd.getText().equals("Password") || cnfrmpaswd.getText().equals("Confirm Password"))                    
+                    JOptionPane.showMessageDialog(null,"YOU CANNOT LEAVE ANY OF THE TEXTFIELDS EMPTY..");
+                else if(mobno.getText().matches(".*[a-zA-Z]+.*") || mobno.getText().length()!=10)
+                    JOptionPane.showMessageDialog(null,"INVALID MOBILE NUMBER ENTERED");
+                else if(email.getText().contains("@")==false || email.getText().contains(".")==false)
+                    JOptionPane.showMessageDialog(null,"INVALID EMAIL ENTERED");
+                else if(bday.getText().matches("\\d{2}-\\d{2}-\\d{4}")==false || bday.getText().length()!=10)
+                    JOptionPane.showMessageDialog(null,"INVALID DATE ENTERED");
+                else if(paswd.getText().equals(cnfrmpaswd.getText())==false)
+                    JOptionPane.showMessageDialog(null,"PASSWORDS DO NOT MATCH");
+                else if(paswd.getText().length()<8 )
+                    JOptionPane.showMessageDialog(null,"PASSWORD MUST BE GREATER THAN 7 CHARACTERS");
+                else if(paswd.getText().length()>16)
+                    JOptionPane.showMessageDialog(null,"PASSWORD MUST BE LESS THAN 16 CHARACTERS");
+                else if(adharno.getText().length()<12)
+                    JOptionPane.showMessageDialog(null,"INVALID AADHAR NUMBER ENTERED");
+                else{
+                    if(!verotp.isEnabled())
+                        verotp.setEnabled(true);
+                    else{
+                        try {
+                                URL url = new URL("https://www.google.com");
+                                URLConnection connection = url.openConnection();
+                                connection.connect();
+                                setTitle("SKY CRYPTO - LOGIN");
+                                login.setVisible(true);
+                                register.setVisible(false);
+                                home.setVisible(false);                
+                                terms.setVisible(false);
+                                privacypolicy.setVisible(false);
+                                    //ANIKET'S CODE HERE..
+                        }
+                        catch (Exception ex) {
+                            JOptionPane.showMessageDialog(null,"Internet Not Connected");
+                        }
+                    }
+                }
+            }
+        });
+        registerb.addMouseListener(new MouseAdapter(){
+            public void mouseEntered(MouseEvent e){
+                if(register.isVisible()){
+                    Graphics g=register.getGraphics();
+                    g.setColor(new Color(211,71,157));
+                    g.fillRoundRect(120,450,280,60,40,40);
+                    registerb.setBackground(new Color(211,71,157));
+                }
+            }
+
+            public void mouseExited(MouseEvent e){
+                if(register.isVisible()){
+                    Graphics g=register.getGraphics();
+                    g.setColor(new Color(113,50,165));
+                    g.fillRoundRect(120,450,280,60,40,40);
+                    registerb.setBackground(new Color(113,50,165));
+                }
+            }
+        });
+
+        verotp.setBounds(570,455,260,50);
+        verotp.setEnabled(false);
+        verotp.setForeground(new Color(222,75,156));
+        verotp.setFont(new Font("consolas",Font.BOLD,20));
+        verotp.setBorder(BorderFactory.createEmptyBorder());
+        register.add(verotp);
+        verotp.addFocusListener(new FocusAdapter(){
+            public void focusGained(FocusEvent e){
+                if(verotp.getText().equals("ENTER YOUR OTP HERE")){
+                    verotp.setText("");                
+                    verotp.setFont(new Font("Gill Sans Ultra Bold",Font.BOLD,30));
+                    registerb.setText("REGISTER");
+                }
+            }
+            public void focusLost(FocusEvent e){
+                if(verotp.getText().equals(""))
+                    verotp.setText("ENTER YOUR OTP HERE");
+            }
+        });
+
+
+
+
+
+        terms=new JPanel(){
+            public void paintComponent(Graphics g){
+                try{
+                 g.drawImage(new ImageIcon("back.jpeg").getImage(),0,0,null);
+                 g.setColor(Color.white);
+                 g.fillRoundRect(100,70,770,460,30,30);
+                }
+                catch(Exception e){}
+            }
+        };
+        terms.setBounds(0,0,1000,650);
+        terms.setBackground(Color.blue);
+        terms.setVisible(false);
+        terms.setLayout(null);
+        add(terms);
+
+        termshead=new JLabel("<   TERMS AND CONDITIONS");
+        termshead.setFont(new Font("rockwell extra bold",Font.BOLD,43));
+        termshead.setBounds(122,50,1000,100);
+        terms.add(termshead);
+        termshead.addMouseListener(new MouseAdapter(){
+            public void mousePressed(MouseEvent e){
+                if(e.getX()>0&&e.getX()<50 && e.getY()>30&&e.getY()<70){                    
+                    setTitle("SKY CRYPTO - LOGIN");
+                    login.setVisible(true);
+                    register.setVisible(false);
+                    home.setVisible(false);
+                    
+                    terms.setVisible(false);
+                    privacypolicy.setVisible(false);
+                }
+            }
+        });
+        termsarea=new JTextArea();
+        termsarea.setEditable(false);
+        termsarea.setText(Files.readString(Path.of("terms.txt")));
+        termspane=new JScrollPane(termsarea);
+        termspane.setBounds(120,130,730,380);
+        terms.add(termspane);
+
+        privacypolicy=new JPanel(){
+            public void paintComponent(Graphics g){
+                try{
+                 g.drawImage(new ImageIcon("back.jpeg").getImage(),0,0,null);
+                 g.setColor(Color.white);
+                 g.fillRoundRect(100,70,770,460,30,30); 
+                }
+                catch(Exception e){}
+            }
+        };
+        privacypolicy.setBounds(0,0,1000,650);
+        privacypolicy.setBackground(Color.blue);
+        privacypolicy.setVisible(false);
+        privacypolicy.setLayout(null);
+        add(privacypolicy);
+
+        privacyhead=new JLabel("<            PRIVACY POLICY");
+        privacyhead.setFont(new Font("rockwell extra bold",Font.BOLD,43));
+        privacyhead.setBounds(122,50,1000,100);
+        privacypolicy.add(privacyhead);
+        privacyhead.addMouseListener(new MouseAdapter(){
+            public void mousePressed(MouseEvent e){
+                if(e.getX()>0&&e.getX()<50 && e.getY()>30&&e.getY()<70){                    
+                    setTitle("SKY CRYPTO - LOGIN");
+                    login.setVisible(true);
+                    register.setVisible(false);
+                    home.setVisible(false);
+                    
+                    terms.setVisible(false);
+                    privacypolicy.setVisible(false);
+                }
+            }
+        });
+        policyarea=new JTextArea();
+        policyarea.setText(Files.readString(Path.of("policy.txt")));
+        policyarea.setEditable(false);
+        policypane=new JScrollPane(policyarea);
+        policypane.setBounds(120,130,730,380);
+        privacypolicy.add(policypane);
+
+
+        home=new JPanel(){
+            public void paintComponent(Graphics g){
+                try{
+                 g.drawImage(new ImageIcon("back.jpeg").getImage(),0,0,null);
+                 g.setColor(Color.white);
+                 g.fillRoundRect(20,20,950,580,50,50); 
+                 g.drawImage(new ImageIcon("frame.jpg").getImage(),28,28,null);                 
+                 g.fillRect(290,35,630,550); 
+                 g.fillRoundRect(890,35,60,550,50,50);
+                 g.drawImage(new ImageIcon("image.jpg").getImage(),80,40,null);
+                 g.drawLine(25,250,290,250);
+                 g.drawLine(25,256,290,256);
+                }
+                catch(Exception e){}
+            }
+        };
+        home.setBounds(0,0,1000,650);
+        home.setVisible(false);
+        home.setLayout(null);
+        add(home);
+
+        transferp=new JPanel(){
+            public void paintComponent(Graphics g){
+                g.drawImage(new ImageIcon("card.png").getImage(),80,80,null);
+                g.setColor(Color.white);
+                g.fillRoundRect(110,135,400,40,30,30);
+                g.fillRoundRect(110,220,200,40,30,30);
+                g.fillRoundRect(110,305,300,40,30,30);
+                g.fillRoundRect(200,370,225,65,30,30);
+                g.setColor(new Color(205,71,158));                
+                g.drawRoundRect(112,138,395,35,30,30);
+                g.drawRoundRect(112,222,195,35,30,30);
+                g.drawRoundRect(112,308,295,35,30,30);
+                g.fillRoundRect(205,373,215,60,30,30);
+            }
+        };
+        transferp.setBounds(290,35,630,550);
+        transferp.setVisible(false);
+        transferp.setBackground(Color.white);
+        transferp.setLayout(null);
+
+        JLabel title=new JLabel("");
+        title.setFont(new Font("berlin sans fb demi",Font.BOLD,52));
+        title.setForeground(new Color(205,71,158));
+        title.setBounds(360,40,700,40);
+        title.setVisible(false); 
+        home.add(title);
+
+
+
+
+
+
+        JLabel entmob1=new JLabel("Enter Recipent's Mobile Number :");
+        entmob1.setFont(new Font("courier",Font.BOLD,20));
+        entmob1.setForeground(Color.white);
+        entmob1.setBounds(110,70,700,100);
+        transferp.add(entmob1);
+        JTextField mobn1=new JTextField("XXXXXXXXXX");
+        mobn1.setFont(new Font("courier",Font.BOLD,20));
+        mobn1.setForeground(Color.gray);
+        mobn1.setBorder(BorderFactory.createEmptyBorder());
+        mobn1.setBounds(120,140,370,30);
+        transferp.add(mobn1);
+        mobn1.addFocusListener(new FocusAdapter(){
+            public void focusGained(FocusEvent e){
+                if(mobn1.getText().equals("XXXXXXXXXX"))
+                    mobn1.setText("");
+            }
+            public void focusLost(FocusEvent e){
+                if(mobn1.getText().equals(""))
+                    mobn1.setText("XXXXXXXXXX");
+            }
+        });
+        JLabel entamt1=new JLabel("Enter the number of bitcoins to send :");
+        entamt1.setFont(new Font("courier",Font.BOLD,20));
+        entamt1.setForeground(Color.white);
+        entamt1.setBounds(110,190,700,30);
+        transferp.add(entamt1);
+        JTextField amnt1=new JTextField("e.g : 7");        
+        amnt1.setFont(new Font("courier",Font.BOLD,20));
+        amnt1.setForeground(Color.gray);
+        amnt1.setBorder(BorderFactory.createEmptyBorder());
+        amnt1.setBounds(120,225,175,30);
+        transferp.add(amnt1);
+        amnt1.addFocusListener(new FocusAdapter(){
+            public void focusGained(FocusEvent e){
+                if(amnt1.getText().equals("e.g : 7"))
+                    amnt1.setText("");
+            }
+            public void focusLost(FocusEvent e){
+                if(amnt1.getText().equals(""))
+                    amnt1.setText("e.g : 7");
+            }
+        });
+        JLabel entpas1=new JLabel("ENTER YOUR PASSWORD :");        
+        entpas1.setFont(new Font("courier",Font.BOLD,20));
+        entpas1.setForeground(Color.white);
+        entpas1.setBounds(110,240,700,100);
+        transferp.add(entpas1);
+        JPasswordField pas1=new JPasswordField("Password");        
+        pas1.setFont(new Font("courier",Font.BOLD,20));
+        pas1.setForeground(Color.gray);
+        pas1.setBorder(BorderFactory.createEmptyBorder());        
+        pas1.setEchoChar((char) 0);
+        pas1.setBounds(120,310,275,30);
+        transferp.add(pas1);
+        pas1.addFocusListener(new FocusAdapter(){
+            public void focusGained(FocusEvent e){
+                if(pas1.getText().equals("Password")){
+                    pas1.setText("");
+                    pas1.setEchoChar('*');
+                }
+            }
+            public void focusLost(FocusEvent e){
+                if(pas1.getText().equals("")){
+                    pas1.setText("Password");
+                    pas1.setEchoChar((char) 0);
+                }
+            }
+        });
+        JButton transf=new JButton("TRANSFER BITCOINS..");
+        transf.setFocusPainted(false);
+        transf.setFont(new Font("courier",Font.BOLD,16));
+        transf.setForeground(Color.white);
+        transf.setBackground(new Color(205,71,158));
+        transf.setBorder(BorderFactory.createEmptyBorder());
+        transf.setBounds(210,378,200,50);
+        transferp.add(transf);   
+        transf.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                if(mobn1.getText().matches(".*[a-zA-Z]+.*") || mobn1.getText().length()!=10)
+                    JOptionPane.showMessageDialog(null,"INVALID MOBILE NUMBER ENTERED");
+                else if(amnt1.getText().equals("e.g : 7"))
+                    JOptionPane.showMessageDialog(null,"NO OF BITCOINS TO BE TRANSFERRED CANNOT BE EMPTY");
+                else if(pas1.getText().equals("Password"))
+                    JOptionPane.showMessageDialog(null,"ENTER PASSWORD");
+                else{
+                    try {
+                        URL url = new URL("https://www.google.com");
+                        URLConnection connection = url.openConnection();
+                        connection.connect();
+                        if(JOptionPane.showConfirmDialog(null,"ARE YOU SURE YOU WANT TO COMMIT CHANGES?")==JOptionPane.YES_OPTION){
+                            //ANIKET'S CODE HERE..
+                        }
+                    }
+                    catch (Exception ex) {
+                        JOptionPane.showMessageDialog(null,"Internet Not Connected");
+                    }
+                }
+            }
+        });
+
+        home.add(transferp);
+
+
+
+
+
+
+
+        purchasep=new JPanel(){
+            public void paintComponent(Graphics g){
+                g.drawImage(new ImageIcon("card.png").getImage(),80,80,null);
+                g.setColor(Color.white);
+                g.fillRoundRect(110,135,400,40,30,30);
+                g.fillRoundRect(110,220,200,40,30,30);
+                g.fillRoundRect(110,305,300,40,30,30);
+                g.fillRoundRect(200,370,225,65,30,30);
+                g.setColor(new Color(205,71,158));                
+                g.drawRoundRect(112,138,395,35,30,30);
+                g.drawRoundRect(112,222,195,35,30,30);
+                g.drawRoundRect(112,308,295,35,30,30);
+                g.fillRoundRect(205,373,215,60,30,30);
+            }
+        };
+        purchasep.setBounds(290,35,630,550);
+        purchasep.setVisible(false);
+        purchasep.setBackground(Color.white);
+        purchasep.setLayout(null);
+        
+        title.setText("PURCHASE BITCOINS");
+        JLabel entmob2=new JLabel("Enter Your Mobile Number :");
+        entmob2.setFont(new Font("courier",Font.BOLD,20));
+        entmob2.setForeground(Color.white);
+        entmob2.setBounds(110,70,700,100);
+        purchasep.add(entmob2);
+        JTextField mobn2=new JTextField("XXXXXXXXXX");
+        mobn2.setFont(new Font("courier",Font.BOLD,20));
+        mobn2.setForeground(Color.gray);
+        mobn2.setBorder(BorderFactory.createEmptyBorder());
+        mobn2.setBounds(120,140,370,30);
+        purchasep.add(mobn2);
+        mobn2.addFocusListener(new FocusAdapter(){
+            public void focusGained(FocusEvent e){
+                if(mobn2.getText().equals("XXXXXXXXXX"))
+                    mobn2.setText("");
+            }
+            public void focusLost(FocusEvent e){
+                if(mobn2.getText().equals(""))
+                    mobn2.setText("XXXXXXXXXX");
+            }
+        });
+        JLabel entamt2=new JLabel("Enter the number of bitcoins to buy :");
+        entamt2.setFont(new Font("courier",Font.BOLD,20));
+        entamt2.setForeground(Color.white);
+        entamt2.setBounds(110,190,700,30);
+        purchasep.add(entamt2);
+        JTextField amnt2=new JTextField("e.g : 7");        
+        amnt2.setFont(new Font("courier",Font.BOLD,20));
+        amnt2.setForeground(Color.gray);
+        amnt2.setBorder(BorderFactory.createEmptyBorder());
+        amnt2.setBounds(120,225,175,30);
+        purchasep.add(amnt2);
+        amnt2.addFocusListener(new FocusAdapter(){
+            public void focusGained(FocusEvent e){
+                if(amnt2.getText().equals("e.g : 7"))
+                    amnt2.setText("");
+            }
+            public void focusLost(FocusEvent e){
+                if(amnt2.getText().equals(""))
+                    amnt2.setText("e.g : 7");
+            }
+        });
+        JLabel entpas2=new JLabel("ENTER YOUR PASSWORD :");        
+        entpas2.setFont(new Font("courier",Font.BOLD,20));
+        entpas2.setForeground(Color.white);
+        entpas2.setBounds(110,240,700,100);
+        purchasep.add(entpas2);
+        JPasswordField pas2=new JPasswordField("Password");        
+        pas2.setFont(new Font("courier",Font.BOLD,20));
+        pas2.setForeground(Color.gray);
+        pas2.setBorder(BorderFactory.createEmptyBorder());
+        pas2.setBounds(120,310,275,30);
+        pas2.setEchoChar((char) 0);
+        purchasep.add(pas2);
+        pas2.addFocusListener(new FocusAdapter(){
+            public void focusGained(FocusEvent e){
+                if(pas2.getText().equals("Password")){
+                    pas2.setText("");
+                    pas2.setEchoChar('*');
+                }
+            }
+            public void focusLost(FocusEvent e){
+                if(pas2.getText().equals("")){
+                    pas2.setText("Password");
+                    pas2.setEchoChar((char) 0);
+                }
+            }
+        });
+        JButton purch=new JButton("PURCHASE BITCOINS..");
+        purch.setFocusPainted(false);
+        purch.setFont(new Font("courier",Font.BOLD,16));
+        purch.setForeground(Color.white);
+        purch.setBackground(new Color(205,71,158));
+        purch.setBorder(BorderFactory.createEmptyBorder());
+        purch.setBounds(210,378,200,50);
+        purchasep.add(purch);   
+        purch.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                if(mobn2.getText().matches(".*[a-zA-Z]+.*") || mobn2.getText().length()!=10)
+                    JOptionPane.showMessageDialog(null,"INVALID MOBILE NUMBER ENTERED");
+                else if(amnt2.getText().equals("e.g : 7"))
+                    JOptionPane.showMessageDialog(null,"NO OF BITCOINS TO BE TRANSFERRED CANNOT BE EMPTY");
+                else if(pas2.getText().equals("Password"))
+                    JOptionPane.showMessageDialog(null,"ENTER PASSWORD");
+                else{
+                    try {
+                        URL url = new URL("https://www.google.com");
+                        URLConnection connection = url.openConnection();
+                        connection.connect();
+                        if(JOptionPane.showConfirmDialog(null,"ARE YOU SURE YOU WANT TO COMMIT CHANGES?")==JOptionPane.YES_OPTION){
+                            //ANIKET'S CODE HERE..
+                        }
+                    }
+                    catch (Exception ex) {
+                        JOptionPane.showMessageDialog(null,"Internet Not Connected");
+                    }
+                }
+            }
+        });     
+
+        
+        home.add(purchasep);
+
+        
+        sellp=new JPanel(){
+            public void paintComponent(Graphics g){
+                g.drawImage(new ImageIcon("card.png").getImage(),80,80,null);
+                g.setColor(Color.white);
+                g.fillRoundRect(110,135,400,40,30,30);
+                g.fillRoundRect(110,220,200,40,30,30);
+                g.fillRoundRect(110,305,300,40,30,30);
+                g.fillRoundRect(200,370,225,65,30,30);
+                g.setColor(new Color(205,71,158));                
+                g.drawRoundRect(112,138,395,35,30,30);
+                g.drawRoundRect(112,222,195,35,30,30);
+                g.drawRoundRect(112,308,295,35,30,30);
+                g.fillRoundRect(205,373,215,60,30,30);
+            }
+        };
+        sellp.setBounds(290,35,630,550);
+        sellp.setVisible(false);
+        sellp.setBackground(Color.white);
+        sellp.setLayout(null);
+
+        title.setText("SELL BITCOINS");
+        JLabel entmob3=new JLabel("Enter Your Mobile Number :");
+        entmob3.setFont(new Font("courier",Font.BOLD,20));
+        entmob3.setForeground(Color.white);
+        entmob3.setBounds(110,70,700,100);
+        sellp.add(entmob3);
+        JTextField mobn3=new JTextField("XXXXXXXXXX");
+        mobn3.setFont(new Font("courier",Font.BOLD,20));
+        mobn3.setForeground(Color.gray);
+        mobn3.setBorder(BorderFactory.createEmptyBorder());
+        mobn3.setBounds(120,140,370,30);
+        sellp.add(mobn3);
+        mobn3.addFocusListener(new FocusAdapter(){
+            public void focusGained(FocusEvent e){
+                if(mobn3.getText().equals("XXXXXXXXXX"))
+                    mobn3.setText("");
+            }
+            public void focusLost(FocusEvent e){
+                if(mobn3.getText().equals(""))
+                    mobn3.setText("XXXXXXXXXX");
+            }
+        });
+        JLabel entamt3=new JLabel("Enter the number of bitcoins to sell :");
+        entamt3.setFont(new Font("courier",Font.BOLD,20));
+        entamt3.setForeground(Color.white);
+        entamt3.setBounds(110,190,700,30);
+        sellp.add(entamt3);
+        JTextField amnt3=new JTextField("e.g : 7");        
+        amnt3.setFont(new Font("courier",Font.BOLD,20));
+        amnt3.setForeground(Color.gray);
+        amnt3.setBorder(BorderFactory.createEmptyBorder());
+        amnt3.setBounds(120,225,175,30);
+        sellp.add(amnt3);
+        amnt3.addFocusListener(new FocusAdapter(){
+            public void focusGained(FocusEvent e){
+                if(amnt3.getText().equals("e.g : 7"))
+                    amnt3.setText("");
+            }
+            public void focusLost(FocusEvent e){
+                if(amnt3.getText().equals(""))
+                    amnt3.setText("e.g : 7");
+            }
+        });
+        JLabel entpas3=new JLabel("ENTER YOUR PASSWORD :");        
+        entpas3.setFont(new Font("courier",Font.BOLD,20));
+        entpas3.setForeground(Color.white);
+        entpas3.setBounds(110,240,700,100);
+        sellp.add(entpas3);
+        JPasswordField pas3=new JPasswordField("Password");        
+        pas3.setFont(new Font("courier",Font.BOLD,20));
+        pas3.setForeground(Color.gray);
+        pas3.setEchoChar((char) 0);
+        pas3.setBorder(BorderFactory.createEmptyBorder());
+        pas3.setBounds(120,310,275,30);
+        sellp.add(pas3);
+        pas3.addFocusListener(new FocusAdapter(){
+            public void focusGained(FocusEvent e){
+                if(pas3.getText().equals("Password")){
+                    pas3.setText("");
+                    pas3.setEchoChar('*');
+                }
+            }
+            public void focusLost(FocusEvent e){
+                if(pas3.getText().equals("")){
+                    pas3.setText("Password");
+                    pas3.setEchoChar((char) 0);
+                }
+            }
+        });
+        JButton sel=new JButton("SELL BITCOINS..");
+        sel.setFocusPainted(false);
+        sel.setFont(new Font("courier",Font.BOLD,20));
+        sel.setForeground(Color.white);
+        sel.setBackground(new Color(205,71,158));
+        sel.setBorder(BorderFactory.createEmptyBorder());
+        sel.setBounds(210,378,200,50);
+        sellp.add(sel);   
+        sel.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                if(mobn3.getText().matches(".*[a-zA-Z]+.*") || mobn3.getText().length()!=10)
+                    JOptionPane.showMessageDialog(null,"INVALID MOBILE NUMBER ENTERED");
+                else if(amnt3.getText().equals("e.g : 7"))
+                    JOptionPane.showMessageDialog(null,"NO OF BITCOINS TO BE TRANSFERRED CANNOT BE EMPTY");
+                else if(pas3.getText().equals("Password"))
+                    JOptionPane.showMessageDialog(null,"ENTER PASSWORD");
+                else{
+                    try {
+                        URL url = new URL("https://www.google.com");
+                        URLConnection connection = url.openConnection();
+                        connection.connect();
+                        if(JOptionPane.showConfirmDialog(null,"ARE YOU SURE YOU WANT TO COMMIT CHANGES?")==JOptionPane.YES_OPTION){
+                            //ANIKET'S CODE HERE..
+                        }
+                    }
+                    catch (Exception ex) {
+                        JOptionPane.showMessageDialog(null,"Internet Not Connected");
+                    }
+                }
+            }
+        });
+
+
+        home.add(sellp);
+
+
+
+        
+        chngpasp=new JPanel(){
+            public void paintComponent(Graphics g){
+                g.drawImage(new ImageIcon("card.png").getImage(),80,80,null);
+                g.setColor(Color.white);
+                g.fillRoundRect(110,135,400,40,30,30);
+                g.fillRoundRect(110,220,200,40,30,30);
+                g.fillRoundRect(110,305,300,40,30,30);
+                g.fillRoundRect(200,370,225,65,30,30);
+                g.setColor(new Color(205,71,158));                
+                g.drawRoundRect(112,138,395,35,30,30);
+                g.drawRoundRect(112,222,195,35,30,30);
+                g.drawRoundRect(112,308,295,35,30,30);
+                g.fillRoundRect(205,373,215,60,30,30);
+            }
+        };
+        chngpasp.setBounds(290,35,630,550);
+        chngpasp.setVisible(false);
+        chngpasp.setBackground(Color.white);
+        chngpasp.setLayout(null);
+
+        title.setText("CHANGE ACCOUNT PASSWORD");
+        JLabel entmob4=new JLabel("Enter Current Password :");
+        entmob4.setFont(new Font("courier",Font.BOLD,20));
+        entmob4.setForeground(Color.white);
+        entmob4.setBounds(110,70,700,100);
+        chngpasp.add(entmob4);
+        JPasswordField mobn4=new JPasswordField("Current Password");
+        mobn4.setFont(new Font("courier",Font.BOLD,20));
+        mobn4.setForeground(Color.gray);
+        mobn4.setBorder(BorderFactory.createEmptyBorder());
+        mobn4.setBounds(120,140,370,30);
+        mobn4.setEchoChar((char) 0);
+        chngpasp.add(mobn4);
+        mobn4.addFocusListener(new FocusAdapter(){
+            public void focusGained(FocusEvent e){
+                if(mobn4.getText().equals("Current Password")){
+                    mobn4.setText("");
+                    mobn4.setEchoChar('*');
+                }
+            }
+            public void focusLost(FocusEvent e){
+                if(mobn4.getText().equals("")){
+                    mobn4.setText("Current Password");
+                    mobn4.setEchoChar((char) 0);
+                }
+            }
+        });
+        JLabel entamt4=new JLabel("Enter new Password :");
+        entamt4.setFont(new Font("courier",Font.BOLD,20));
+        entamt4.setForeground(Color.white);
+        entamt4.setBounds(110,190,700,30);
+        chngpasp.add(entamt4);
+        JPasswordField amnt4=new JPasswordField("New Password");        
+        amnt4.setFont(new Font("courier",Font.BOLD,20));
+        amnt4.setForeground(Color.gray);
+        amnt4.setBorder(BorderFactory.createEmptyBorder());
+        amnt4.setBounds(120,225,175,30);
+        amnt4.setEchoChar((char) 0);
+        chngpasp.add(amnt4);
+        amnt4.addFocusListener(new FocusAdapter(){
+            public void focusGained(FocusEvent e){
+                if(amnt4.getText().equals("New Password")){
+                    amnt4.setText("");
+                    amnt4.setEchoChar('*');
+                }
+            }
+            public void focusLost(FocusEvent e){
+                if(amnt4.getText().equals("")){
+                    amnt4.setText("New Password");
+                    amnt4.setEchoChar((char) 0);
+                }
+            }
+        });
+        JLabel entpas4=new JLabel("CONFIRM YOUR PASSWORD :");        
+        entpas4.setFont(new Font("courier",Font.BOLD,20));
+        entpas4.setForeground(Color.white);
+        entpas4.setBounds(110,240,700,100);
+        chngpasp.add(entpas4);
+        JPasswordField pas4=new JPasswordField("Confirm Password");        
+        pas4.setFont(new Font("courier",Font.BOLD,20));
+        pas4.setForeground(Color.gray);
+        pas4.setBorder(BorderFactory.createEmptyBorder());
+        pas4.setBounds(120,310,275,30);
+        pas4.setEchoChar((char) 0);
+        chngpasp.add(pas4);
+        pas4.addFocusListener(new FocusAdapter(){
+            public void focusGained(FocusEvent e){
+                if(pas4.getText().equals("Confirm Password")){
+                    pas4.setText("");
+                    pas4.setEchoChar('*');
+                }
+            }
+            public void focusLost(FocusEvent e){
+                if(pas4.getText().equals("")){
+                    pas4.setText("Confirm Password");
+                    pas4.setEchoChar((char) 0);
+                }
+            }
+        });
+        JButton chang=new JButton("CHANGE PASSWORD..");
+        chang.setFocusPainted(false);
+        chang.setFont(new Font("courier",Font.BOLD,16));
+        chang.setForeground(Color.white);
+        chang.setBackground(new Color(205,71,158));
+        chang.setBorder(BorderFactory.createEmptyBorder());
+        chang.setBounds(210,378,200,50);
+        chngpasp.add(chang);        
+        chang.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                if(mobn4.getText().equals("Current Password"))
+                    JOptionPane.showMessageDialog(null,"ENTER CURRENT PASSWORD");
+                else if(amnt4.getText().equals("New Password"))
+                    JOptionPane.showMessageDialog(null,"ENTER NEW PASSWORD");
+                else if(pas4.getText().equals("Confirm Password"))
+                    JOptionPane.showMessageDialog(null,"ENTER CONFIRM PASSWORD");
+                else if(amnt4.getText().equals(mobn4.getText()))
+                    JOptionPane.showMessageDialog(null,"PASSWORD CANNOT BE CHANGED TO ORIGINAL PASSWORD");
+                else if(amnt4.getText().equals(pas4.getText())==false)
+                    JOptionPane.showMessageDialog(null,"PASSWORDS DO NOT MATCH");
+                else if(amnt4.getText().length()<8)
+                    JOptionPane.showMessageDialog(null,"PASSWORD CANNOT BE SHORTER THAN 8 CHARACTERS");
+                else if(amnt4.getText().length()>16)
+                    JOptionPane.showMessageDialog(null,"PASSWORD CANNOT BE LONGER THAN 8 CHARACTERS");
+                else{
+                    try {
+                        URL url = new URL("https://www.google.com");
+                        URLConnection connection = url.openConnection();
+                        connection.connect();
+                        if(JOptionPane.showConfirmDialog(null,"ARE YOU SURE YOU WANT TO COMMIT CHANGES?")==JOptionPane.YES_OPTION){
+                            //ANIKET'S CODE HERE..
+                        }
+                    }
+                    catch (Exception ex) {
+                        JOptionPane.showMessageDialog(null,"Internet Not Connected");
+                    }
+                }
+            }
+        });
+
+
+        home.add(chngpasp);
+
+        
+        histp=new JPanel(){
+            public void paintComponent(Graphics g){
+                g.drawImage(new ImageIcon("card.png").getImage(),80,80,null);
+                g.setColor(Color.white);
+                //g.fillRoundRect(110,135,400,40,30,30);
+                g.fillRoundRect(110,200,300,40,30,30);
+                g.fillRoundRect(110,295,300,40,30,30);
+                g.fillRoundRect(200,370,225,65,30,30);
+                g.setColor(new Color(205,71,158));                
+                //g.drawRoundRect(112,138,395,35,30,30);
+                g.drawRoundRect(112,202,295,35,30,30);
+                g.drawRoundRect(112,298,295,35,30,30);
+                g.fillRoundRect(205,373,215,60,30,30);
+            }
+        };
+        histp.setBounds(290,35,630,550);
+        histp.setVisible(false);
+        histp.setBackground(Color.white);
+        histp.setLayout(null);
+
+        title.setText("SHOW TRANSACTION");
+        JLabel entmob5=new JLabel("Enter Your Mobile Number :");
+        entmob5.setFont(new Font("courier",Font.BOLD,20));
+        entmob5.setForeground(Color.white);
+        entmob5.setBounds(120,120,700,100);
+        histp.add(entmob5);
+        JTextField mobn5=new JTextField("XXXXXXXXXX");
+        mobn5.setFont(new Font("courier",Font.BOLD,20));
+        mobn5.setForeground(Color.gray);
+        mobn5.setBorder(BorderFactory.createEmptyBorder());
+        mobn5.setBounds(130,205,270,30);
+        histp.add(mobn5);
+        mobn5.addFocusListener(new FocusAdapter(){
+            public void focusGained(FocusEvent e){
+                if(mobn5.getText().equals("XXXXXXXXXX"))
+                    mobn5.setText("");
+            }
+            public void focusLost(FocusEvent e){
+                if(mobn5.getText().equals(""))
+                    mobn5.setText("XXXXXXXXXX");
+            }
+        });
+        JLabel entpas5=new JLabel("ENTER YOUR PASSWORD :");        
+        entpas5.setFont(new Font("courier",Font.BOLD,20));
+        entpas5.setForeground(Color.white);
+        entpas5.setBounds(110,220,700,100);
+        histp.add(entpas5);
+        JPasswordField pas5=new JPasswordField("Password");        
+        pas5.setFont(new Font("courier",Font.BOLD,20));
+        pas5.setForeground(Color.gray);
+        pas5.setBorder(BorderFactory.createEmptyBorder());
+        pas5.setBounds(120,300,275,30);
+        histp.add(pas5);
+        pas5.setEchoChar((char) 0);
+        pas5.addFocusListener(new FocusAdapter(){
+            public void focusGained(FocusEvent e){
+                if(pas5.getText().equals("Password")){
+                    pas5.setText("");
+                    pas5.setEchoChar('*');
+                }
+            }
+            public void focusLost(FocusEvent e){
+                if(pas5.getText().equals("")){
+                    pas5.setText("Password");
+                    pas5.setEchoChar((char) 0);
+                }
+            }
+        });
+        JButton transac=new JButton("SUBMIT REQUEST");
+        transac.setFocusPainted(false);
+        transac.setFont(new Font("courier",Font.BOLD,20));
+        transac.setForeground(Color.white);
+        transac.setBackground(new Color(205,71,158));
+        transac.setBorder(BorderFactory.createEmptyBorder());
+        transac.setBounds(210,378,200,50);
+        histp.add(transac);      
+        transac.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                if(mobn5.getText().matches(".*[a-zA-Z]+.*") || mobn5.getText().length()!=10)
+                    JOptionPane.showMessageDialog(null,"INVALID MOBILE NUMBER ENTERED");
+                else if(pas5.getText().equals("Password"))
+                    JOptionPane.showMessageDialog(null,"ENTER PASSWORD");
+                else{
+                    try {
+                        URL url = new URL("https://www.google.com");
+                        URLConnection connection = url.openConnection();
+                        connection.connect();
+                        
+                            //ANIKET'S CODE HERE..
+                        
+                    }
+                    catch (Exception ex) {
+                        JOptionPane.showMessageDialog(null,"Internet Not Connected");
+                    }
+                }
+            }
+        });  
+
+
+        home.add(histp);
+
+
+
+
+
+
+        chkamtp=new JPanel(){
+            public void paintComponent(Graphics g){
+                g.drawImage(new ImageIcon("card.png").getImage(),80,80,null);
+                g.setColor(Color.white);
+                g.fillRoundRect(110,200,300,40,30,30);
+                g.fillRoundRect(110,295,300,40,30,30);
+                g.fillRoundRect(200,370,225,65,30,30);
+                g.setColor(new Color(205,71,158));      
+                g.drawRoundRect(112,202,295,35,30,30);
+                g.drawRoundRect(112,298,295,35,30,30);
+                g.fillRoundRect(205,373,215,60,30,30);
+            }
+        };
+        chkamtp.setBounds(290,35,630,550);
+        chkamtp.setVisible(false);
+        chkamtp.setBackground(Color.white);
+        chkamtp.setLayout(null);
+
+        JLabel entmob6=new JLabel("Enter Your Mobile Number :");
+        entmob6.setFont(new Font("courier",Font.BOLD,20));
+        entmob6.setForeground(Color.white);
+        entmob6.setBounds(120,120,700,100);
+        chkamtp.add(entmob6);
+        JTextField mobn6=new JTextField("XXXXXXXXXX");
+        mobn6.setFont(new Font("courier",Font.BOLD,20));
+        mobn6.setForeground(Color.gray);
+        mobn6.setBorder(BorderFactory.createEmptyBorder());
+        mobn6.setBounds(130,205,270,30);
+        chkamtp.add(mobn6);
+        mobn6.addFocusListener(new FocusAdapter(){
+            public void focusGained(FocusEvent e){
+                if(mobn6.getText().equals("XXXXXXXXXX"))
+                    mobn6.setText("");
+            }
+            public void focusLost(FocusEvent e){
+                if(mobn6.getText().equals(""))
+                    mobn6.setText("XXXXXXXXXX");
+            }
+        });
+        JLabel entpas6=new JLabel("ENTER YOUR PASSWORD :");        
+        entpas6.setFont(new Font("courier",Font.BOLD,20));
+        entpas6.setForeground(Color.white);
+        entpas6.setBounds(110,220,700,100);
+        chkamtp.add(entpas6);
+        JPasswordField pas6=new JPasswordField("Password");        
+        pas6.setFont(new Font("courier",Font.BOLD,20));
+        pas6.setForeground(Color.gray);
+        pas6.setBorder(BorderFactory.createEmptyBorder());
+        pas6.setBounds(120,300,275,30);
+        chkamtp.add(pas6);
+        pas6.setEchoChar((char) 0);
+        pas6.addFocusListener(new FocusAdapter(){
+            public void focusGained(FocusEvent e){
+                if(pas6.getText().equals("Password")){
+                    pas6.setText("");
+                    pas6.setEchoChar('*');
+                }
+            }
+            public void focusLost(FocusEvent e){
+                if(pas6.getText().equals("")){
+                    pas6.setText("Password");
+                    pas6.setEchoChar((char) 0);
+                }
+            }
+        });
+        JButton chkbal=new JButton("CHECK BALANCE");
+        chkbal.setFocusPainted(false);
+        chkbal.setFont(new Font("courier",Font.BOLD,20));
+        chkbal.setForeground(Color.white);
+        chkbal.setBackground(new Color(205,71,158));
+        chkbal.setBorder(BorderFactory.createEmptyBorder());
+        chkbal.setBounds(210,378,200,50);
+        chkamtp.add(chkbal);
+        chkbal.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                if(mobn6.getText().matches(".*[a-zA-Z]+.*") || mobn6.getText().length()!=10)
+                    JOptionPane.showMessageDialog(null,"INVALID MOBILE NUMBER ENTERED");
+                else if(pas6.getText().equals("Password"))
+                    JOptionPane.showMessageDialog(null,"ENTER PASSWORD");
+                else{
+                    try {
+                        URL url = new URL("https://www.google.com");
+                        URLConnection connection = url.openConnection();
+                        connection.connect();                        
+                        JOptionPane.showMessageDialog(null,"YOUR CURRENT ACCOUNT BALANCE IS :: \n 71652");  
+                            //ANIKET'S CODE HERE..
+                    }
+                    catch (Exception ex) {
+                        JOptionPane.showMessageDialog(null,"Internet Not Connected");
+                    }
+                }
+            }
+        });    
+
+
+        home.add(chkamtp);
+
+
+
+
+
+
+
+        name=new JLabel("fname lname");
+        name.setBounds(65,210,200,30);
+        name.setForeground(Color.white);
+        name.setFont(new Font("courier",Font.BOLD,30));
+        home.add(name);
+
+        transfer=new JLabel("TRANSFER BITCOINS");
+        transfer.setBounds(50,260,240,50);
+        transfer.setForeground(Color.white);
+        transfer.setFont(new Font("consolas",Font.BOLD,20));
+        home.add(transfer);
+        transfer.addMouseListener(new MouseAdapter(){
+            public void mousePressed(MouseEvent e){
+                title.setVisible(true);
+                title.setText("TRANSFER BITCOINS");
+                title.setBounds(370,40,700,40);
+                transferp.setVisible(true);
+                purchasep.setVisible(false);
+                chkamtp.setVisible(false);
+                sellp.setVisible(false);
+                histp.setVisible(false);                
+                chngpasp.setVisible(false);                
+            }
+            public void mouseEntered(MouseEvent e){
+                transfer.setForeground(new Color(221,76,156));
+                transfer.setFont(new Font("consolas",Font.BOLD,25));
+                transfer.setBounds(40,260,290,50);
+            }
+            public void mouseExited(MouseEvent e){                
+                transfer.setForeground(Color.white);
+                transfer.setFont(new Font("consolas",Font.BOLD,20));
+                transfer.setBounds(50,260,290,50);
+            }
+        });
+        
+        purchase=new JLabel("PURCHASE BITCOINS");
+        purchase.setBounds(50,300,240,50);
+        purchase.setForeground(Color.white);
+        purchase.setFont(new Font("consolas",Font.BOLD,20));
+        home.add(purchase);
+        purchase.addMouseListener(new MouseAdapter(){
+            public void mousePressed(MouseEvent e){
+                title.setVisible(true);
+                title.setText("PURCHASE BITCOINS");
+                title.setBounds(370,40,700,40);
+                transferp.setVisible(false);
+                chkamtp.setVisible(false);
+                purchasep.setVisible(true);
+                sellp.setVisible(false);
+                histp.setVisible(false);        
+                chngpasp.setVisible(false);                
+            }
+            public void mouseEntered(MouseEvent e){
+                purchase.setForeground(new Color(221,76,156));
+                purchase.setFont(new Font("consolas",Font.BOLD,25));
+                purchase.setBounds(40,300,290,50);
+            }
+            public void mouseExited(MouseEvent e){                
+                purchase.setForeground(Color.white);
+                purchase.setFont(new Font("consolas",Font.BOLD,20));
+                purchase.setBounds(50,300,290,50);
+            }
+        });
+        
+        sell=new JLabel("SELL BITCOINS");
+        sell.setBounds(50,340,240,50);
+        sell.setForeground(Color.white);
+        sell.setFont(new Font("consolas",Font.BOLD,20));
+        home.add(sell);
+        sell.addMouseListener(new MouseAdapter(){
+            public void mousePressed(MouseEvent e){
+                title.setVisible(true);
+                title.setText("SELL BITCOINS");
+                title.setBounds(440,40,700,40);
+                transferp.setVisible(false);
+                purchasep.setVisible(false);
+                chkamtp.setVisible(false);
+                sellp.setVisible(true);
+                histp.setVisible(false);            
+                chngpasp.setVisible(false);                
+            }
+            public void mouseEntered(MouseEvent e){
+                sell.setForeground(new Color(221,76,156));
+                sell.setFont(new Font("consolas",Font.BOLD,25));
+                sell.setBounds(40,340,290,50);
+            }
+            public void mouseExited(MouseEvent e){                
+                sell.setForeground(Color.white);
+                sell.setFont(new Font("consolas",Font.BOLD,20));
+                sell.setBounds(50,340,290,50);
+            }
+        });
+        
+        hist=new JLabel("SEE TRANSACTIONS");
+        hist.setBounds(50,380,240,50);
+        hist.setForeground(Color.white);
+        hist.setFont(new Font("consolas",Font.BOLD,20));
+        home.add(hist);
+        hist.addMouseListener(new MouseAdapter(){
+            public void mousePressed(MouseEvent e){
+                title.setVisible(true);
+                title.setText("SEE TRANSACTIONS");
+                title.setBounds(385,40,700,40);
+                transferp.setVisible(false);
+                purchasep.setVisible(false);
+                sellp.setVisible(false);
+                histp.setVisible(true);          
+                chkamtp.setVisible(false);      
+                chngpasp.setVisible(false);                
+            }
+            public void mouseEntered(MouseEvent e){
+                hist.setForeground(new Color(221,76,156));
+                hist.setFont(new Font("consolas",Font.BOLD,25));
+                hist.setBounds(40,380,290,50);
+            }
+            public void mouseExited(MouseEvent e){                
+                hist.setForeground(Color.white);
+                hist.setFont(new Font("consolas",Font.BOLD,20));
+                hist.setBounds(50,380,290,50);
+            }
+        });
+        
+        amt=new JLabel("CHECK BALANCE");
+        amt.setBounds(50,420,240,50);
+        amt.setForeground(Color.white);
+        amt.setFont(new Font("consolas",Font.BOLD,20));
+        home.add(amt);
+        amt.addMouseListener(new MouseAdapter(){
+            public void mousePressed(MouseEvent e){
+                title.setVisible(true);
+                title.setText("CHECK BALANCE");
+                title.setBounds(395,40,700,40);
+                transferp.setVisible(false);
+                purchasep.setVisible(false);
+                sellp.setVisible(false);
+                histp.setVisible(false);
+                chkamtp.setVisible(true);
+                chngpasp.setVisible(false);             
+            }
+            public void mouseEntered(MouseEvent e){
+                amt.setForeground(new Color(221,76,156));
+                amt.setFont(new Font("consolas",Font.BOLD,25));
+                amt.setBounds(40,420,290,50);
+            }
+            public void mouseExited(MouseEvent e){                
+                amt.setForeground(Color.white);
+                amt.setFont(new Font("consolas",Font.BOLD,20));
+                amt.setBounds(50,420,290,50);
+            }
+        });
+        
+        chngpas=new JLabel("CHANGE PASSWORD");
+        chngpas.setBounds(50,460,240,50);
+        chngpas.setForeground(Color.white);
+        chngpas.setFont(new Font("consolas",Font.BOLD,20));
+        home.add(chngpas);
+        chngpas.addMouseListener(new MouseAdapter(){
+            public void mousePressed(MouseEvent e){
+                title.setVisible(true);
+                title.setText("CHANGE PASSWORD");
+                title.setBounds(365,40,700,40);
+                transferp.setVisible(false);
+                purchasep.setVisible(false);
+                sellp.setVisible(false);
+                chkamtp.setVisible(false);
+                histp.setVisible(false);                
+                chngpasp.setVisible(true);                
+            }
+            public void mouseEntered(MouseEvent e){
+                chngpas.setForeground(new Color(221,76,156));
+                chngpas.setFont(new Font("consolas",Font.BOLD,25));
+                chngpas.setBounds(40,460,290,50);
+            }
+            public void mouseExited(MouseEvent e){                
+                chngpas.setForeground(Color.white);
+                chngpas.setFont(new Font("consolas",Font.BOLD,20));
+                chngpas.setBounds(50,460,290,50);
+            }
+        });
+        
+        logout=new JLabel("LOG OUT");
+        logout.setBounds(50,500,240,50);
+        logout.setForeground(Color.white);
+        logout.setFont(new Font("consolas",Font.BOLD,20));
+        home.add(logout);
+        logout.addMouseListener(new MouseAdapter(){
+            public void mousePressed(MouseEvent e){
+                title.setVisible(true);
+                title.setText("TRANSFER BITCOINS");
+                title.setBounds(360,40,700,40);
+                transferp.setVisible(false);
+                purchasep.setVisible(false);
+                sellp.setVisible(false);
+                histp.setVisible(false);                
+                chngpasp.setVisible(false);                
+                home.setVisible(false);
+                chkamtp.setVisible(false);
+                register.setVisible(false);
+                login.setVisible(true);
+                loginb.setBackground(new Color(38,167,222));
+            }
+            public void mouseEntered(MouseEvent e){
+                logout.setForeground(new Color(221,76,156));
+                logout.setFont(new Font("consolas",Font.BOLD,25));
+                logout.setBounds(40,500,290,50);
+            }
+            public void mouseExited(MouseEvent e){                
+                logout.setForeground(Color.white);
+                logout.setFont(new Font("consolas",Font.BOLD,20));
+                logout.setBounds(50,500,290,50);
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+        setTitle("SKY CRYPTO - LOGIN");
+        setLayout(null);
+        setSize(1000,650);
+        setLocation((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth()/16,20);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
+    }
+
+    public static void main(String args[])throws Exception{
+        micropro ob=new micropro();
+    }
+}
